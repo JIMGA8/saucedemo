@@ -4,11 +4,11 @@
 
 # prueba E2E:
 Realizar una prueba funcional automatizada (Prueba E2E) de un flujo de compra en la página https://www.saucedemo.com/
-  Autenticarse con el usuario: standard_user y password: secret_sauce
-  Agregar dos productos al carrito
-  Visualizar el carrito
-  Completar el formulario de compra
-  Finalizar la compra hasta la confirmación: “THANK YOU FOR YOUR ORDER”
+\t\tAutenticarse con el usuario: standard_user y password: secret_sauce
+\t Agregar dos productos al carrito
+\t Visualizar el carrito
+\t Completar el formulario de compra
+\t Finalizar la compra hasta la confirmación: “THANK YOU FOR YOUR ORDER”
 
 se creo aparte la funcionalidad de login y la misma es empleada como Background en la funcionalidad de la compra de un producto.
 se creo un Helpers para convertir el String que se recibe dedes productos a una lista y asi poder seleccionar cualquier producto que desea agregar al carrito
@@ -38,6 +38,8 @@ Gradle: como herramienta de construcción.
 
 Instale JDK (última versión estable). Descarga los WebDrivers que usarás en tu proyecto. Si usa Windows, especifique la ruta al controlador en BasePage.java como System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver"); Si está en MacOS: Abra la Terminal Ejecute sudo nano /etc/paths Ingrese su contraseña Vaya al final del archivo e ingrese la ruta que desea agregar (Mi RUTA se parece a: /Users/myname/Documents/WebDriver) Control -x para salir Y para guardar Presione enter para confirmar Para verificar dos veces, salga de Terminal y reinícielo. Ejecute echo $PATH. Debería ver su ruta recién agregada en el flujo de otras rutas que ya están allí. ¡Finalmente, actualice sus pruebas para que se ejecuten con Chrome y ejecute sus pruebas! Instale el complemento Cucumber en el IDE de su elección. Cree el proyecto para descargar las dependencias especificadas en Gradle.build.
 
+## POM
+
 Modelo de objetos de página Este marco utiliza el modelo de objetos de página, con una página base que se encarga de crear la instancia del controlador y los métodos heredados para interactuar con los elementos web en las clases dentro del directorio de páginas.
 
 Página base
@@ -52,7 +54,7 @@ para ejecutar la prueba de API de Sign Up utilice el tag @SignUp
 para ejecutar la prueba de API de Login utilice el tag @Login
 para ejecutar todo el proyecto utilice el tag @Proyecto
 
-Informes
+## Informes
 
 Una vez ejecutado, encontrará los informes dentro del directorio Test-output, que contiene un archivo HTML que puede abrir con cualquier navegador y acceder al informe con los resultados.
 tambien obtendrá una url en la terminal con el informe generado (se autodestruye en 24 hs).
