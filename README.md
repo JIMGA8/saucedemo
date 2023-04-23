@@ -3,9 +3,9 @@
 ## realizar el desafio de Prueba E2E Y API:
 
 # prueba E2E:
-Realizar una prueba funcional automatizada (Prueba E2E) de un flujo de compra en la página https://www.saucedemo.com/
-  Autenticarse con el usuario: standard_user y password: secret_sauce
-  Agregar dos productos al carrito
+Realizar una prueba funcional automatizada (Prueba E2E) de un flujo de compra en la página https://www.saucedemo.com/ /n \n
+\tAutenticarse con el usuario: standard_user y password: secret_sauce
+/tAgregar dos productos al carrito
   Visualizar el carrito
   Completar el formulario de compra
   Finalizar la compra hasta la confirmación: “THANK YOU FOR YOUR ORDER”
