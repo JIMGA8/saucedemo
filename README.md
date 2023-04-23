@@ -4,11 +4,11 @@
 
 # prueba E2E:
 Realizar una prueba funcional automatizada (Prueba E2E) de un flujo de compra en la página https://www.saucedemo.com/
-\t\tAutenticarse con el usuario: standard_user y password: secret_sauce
-\t Agregar dos productos al carrito
-\t Visualizar el carrito
-\t Completar el formulario de compra
-\t Finalizar la compra hasta la confirmación: “THANK YOU FOR YOUR ORDER”
+  Autenticarse con el usuario: standard_user y password: secret_sauce
+  Agregar dos productos al carrito
+  Visualizar el carrito
+  Completar el formulario de compra
+  Finalizar la compra hasta la confirmación: “THANK YOU FOR YOUR ORDER”
 
 se creo aparte la funcionalidad de login y la misma es empleada como Background en la funcionalidad de la compra de un producto.
 se creo un Helpers para convertir el String que se recibe dedes productos a una lista y asi poder seleccionar cualquier producto que desea agregar al carrito
