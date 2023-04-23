@@ -13,9 +13,9 @@ public class LoginSteps {
         login.navigateToSaucedemo();
     }
 
-    @When("^ingreso mi usuario (.+) y contraseña (.+)$")
-    public void WriteUserAndPass(String usuario, String contraseña) {
-        login.WriteUserAndPass(usuario, contraseña);
+    @When("^ingreso mi usuario (.+) y contrasena (.+)$")
+    public void WriteUserAndPass(String usuario, String contrasena) {
+        login.WriteUserAndPass(usuario, contrasena);
     }
 
     @When("^valido el inicio de seccion$")

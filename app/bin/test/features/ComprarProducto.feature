@@ -1,11 +1,11 @@
-@ComprarProducto
+@ComprarProducto @Proyecto
 Feature: comprar un producto
 
-    el siguiente Feature tiene como finalidad agregar uno o varios productos al carrito de compra, llenar el formulario de compra y fanilizar la compra
+    el siguiente Feature tiene como finalidad agregar uno o varios productos al carrito de compra, llenar el formulario de compra y finalizar la compra
 
     Background: login
         Given navego a la pagina de saucedemo
-        When ingreso mi usuario standard_user y contraseña secret_sauce
+        When ingreso mi usuario standard_user y contrasena secret_sauce
         Then valido el inicio de seccion
 
     Scenario: Agregar productos al carrito, completar formulario de compra y finalizar la compra

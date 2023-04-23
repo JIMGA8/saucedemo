@@ -1,0 +1,13 @@
+El objetivo principal de este repositorio es realizar el desafío de Prueba E2E y API.
+
+El desafío de Prueba E2E consiste en realizar una prueba funcional automatizada de un flujo de compra en la página https://www.saucedemo.com/. Se especifica que se deben realizar acciones como autenticarse, agregar productos al carrito, completar el formulario de compra, entre otras.
+
+El desafío de Prueba API consiste en trabajar con endpoints de la página https://api.demoblaze.com/ y se especifican algunas pruebas a realizar, como crear un nuevo usuario en signup y tratar de crear un usuario ya existente, entre otras.
+
+El proyecto utiliza varias herramientas y tecnologías, como Selenium WebDriver, Java, RestAssured, Cucumber, Gradle, entre otras.
+
+Se especifica que se utiliza el modelo de objetos de página y se brinda información sobre la clase BasePage.java.
+
+Se detallan las opciones para ejecutar las pruebas, ya sea desde un Runner.java o desde la línea de comando.
+
+Se indica que se generan informes HTML en el directorio Test-output y se brinda información sobre la ubicación de los mismos. También se menciona que se obtiene una URL en la terminal con el informe generado.

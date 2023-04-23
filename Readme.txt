@@ -10,9 +10,7 @@ Realizar una prueba funcional automatizada (Prueba E2E) de un flujo de compra en
   Completar el formulario de compra
   Finalizar la compra hasta la confirmación: “THANK YOU FOR YOUR ORDER”
 
-se creo aparte la funcionalidad de login y la misma es empleada como Background en la funcionalidad de la comprar de un producto.
-se creo un Helpers para que convertir el String que se recibe de producto a una lista y asi poder seleccionar cualquier producto que desee y agregaro al carrito
-se creo un Helpers para eliminar los caracteres (menos numeros y punto) de los precios de los productos y asi poder verificar que la sumatoria de los productos agregados al carrito es igual al sub total
+se creo aparte la funcionalidad de login y la misma es empleada como Background en la funcionalidad de la comprar de un producto
   
 #prueba Api
 endpoint  https://api.demoblaze.com/signup
@@ -23,7 +21,7 @@ endpoint  https://api.demoblaze.com/login
   Usuario y password correcto en login
   Usuario y password incorrecto en login
 
-se crearon 4 payloads (UsuarioNuevo, UsuarioCreado, UsuarioIncorrecto,ContraseñaIncorrecta) los cuales se emplean para la verificacion de los endpoint.. se creo un helps para generar usuario aletario para que sea empleado en la creacion de un nuevo usuario y asi poder correr las pruebas las veces que se dese sin necesidad de modifcar el payload Json UsuarioNuevo
+se crearon 4 payloads (UsuarioNuevo, UsuarioCreado, UsuarioIncorrecto,ContraseñaIncorrecta) los cuales se emplean para la verificacion de los endpoint.. debe tener en cuenta que el ejecutar la prueba para crear un usuario si la quiere volver a ejecutar debe actualizar el payload de usuario nuevo.
 
 ##Este proyecto fue creado con:
 

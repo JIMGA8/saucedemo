@@ -8,15 +8,16 @@ import org.openqa.selenium.TakesScreenshot;
 import proyecto.Pages.BasePage;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
-
+import io.restassured.response.Response;
 import io.cucumber.java.Before;
 
 public class Hooks extends BasePage {
 
     private static Scenario scenario;
-    public static int tamañoLista;
+    public static int tamanoLista;
     public static double precioProductos;
     public static List<String> listaProductos;
+    public static Response response;
 
     public Hooks() {
         super(driver);

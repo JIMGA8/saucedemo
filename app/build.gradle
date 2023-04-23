@@ -42,8 +42,20 @@ dependencies {
     // https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting
     implementation group: 'net.masterthought', name: 'cucumber-reporting', version: '5.7.0'
 
+     implementation group: 'org.json', name: 'json', version: '20180813'
+
+      // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '4.4.0'
+
+    // https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+    testImplementation 'io.rest-assured:rest-assured:3.3.0'
+
+    // https://mvnrepository.com/artifact/com.github.javafaker/javafaker
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+
+
 }
 
 test{
-    systemProperty "cucumberoptions", System.getProperty("cucumberOptions")
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
 }

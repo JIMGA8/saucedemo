@@ -18,8 +18,8 @@ public class ListadoProducto extends BasePage {
 
     public boolean AgregarProductosAlCarrito(List<String> productos) {
         int cantItem = 0;
-        int tamañoListaProductos = productos.size();
-        Hooks.tamañoLista = tamañoListaProductos;
+        int tamanoListaProductos = productos.size();
+        Hooks.tamanoLista = tamanoListaProductos;
         Hooks.listaProductos = productos;
         for (String producto : productos) {
             String btnAgregarCarrito = "//button[contains(@data-test, 'add-to-cart-"
@@ -28,7 +28,7 @@ public class ListadoProducto extends BasePage {
             btnAgregar.click();
             cantItem += 1;
         }
-        return cantItem == tamañoListaProductos;
+        return cantItem == tamanoListaProductos;
     }
 
     public int getCantidaddeitemCarrito() {

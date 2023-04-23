@@ -23,8 +23,8 @@ public class ComprarProductoSteps {
     public void agregarProductoAlCarrito(String productos) {
         Assert.assertTrue("no se agregaron todos los productos verifique " + productos,
                 listadoProducto.AgregarProductosAlCarrito(helpers.convertirStringEnLista(productos)));
-        int tamañoLista = Hooks.tamañoLista;
-        Assert.assertEquals(tamañoLista, listadoProducto.getCantidaddeitemCarrito());
+        int tamanoLista = Hooks.tamanoLista;
+        Assert.assertEquals(tamanoLista, listadoProducto.getCantidaddeitemCarrito());
     }
 
     @Then("^ingreso al carro de compra y valido que se encuentran los productos agregados$")
