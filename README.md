@@ -11,7 +11,7 @@ Realizar una prueba funcional automatizada (Prueba E2E) de un flujo de compra en
   Finalizar la compra hasta la confirmación: “THANK YOU FOR YOUR ORDER”
 
 se creo aparte la funcionalidad de login y la misma es empleada como Background en la funcionalidad de la compra de un producto.
-se creo un Helpers para convertir el String que se recibe dedes productos a una lista y asi poder seleccionar cualquier producto que desea agregar al carrito
+se creo un Helpers para convertir el String que se recibe desde productos a una lista y asi poder seleccionar cualquier producto que desea agregar al carrito
 se creo un Helpers para eliminar los caracteres (menos numeros y punto) de los precios de los productos y asi poder verificar que la sumatoria de los productos agregados al carrito es igual al subtotal
   
 # prueba Api
@@ -46,7 +46,8 @@ Página base
 
 BasePage.java es la clase donde viven el controlador y los métodos para interactuar con las páginas web. La espera se establece una vez aquí y se usa de forma inteligente, procediendo con las acciones en caso de que se encuentre el elemento y esperando hasta el umbral establecido en esta clase.
 
-Ejecución de las pruebas Para ejecutar las pruebas, tiene dos opciones:
+## Ejecución de las pruebas 
+Para ejecutar las pruebas, tiene dos opciones:
 Ejecutando desde un Runner.java, especificando qué etiqueta ejecutar (usted configura las etiquetas en los Escenarios). Ejecutando desde la línea de comando y usando: gradle test -Dcucumber.options="--tags @CucumberTag" Observe que la tarea "test" se crea en el archivo Gradle.Build.
 
 para ejecutar la prueba de E2E para comprar Productos utilice el tag @ComprarProducto
