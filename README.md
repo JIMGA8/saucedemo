@@ -1,8 +1,8 @@
-#Objetivo de este repositorio
+# Objetivo de este repositorio
 
-##realizar el desafio de Prueba E2E Y API:
+## realizar el desafio de Prueba E2E Y API:
 
-#prueba E2E:
+# prueba E2E:
 Realizar una prueba funcional automatizada (Prueba E2E) de un flujo de compra en la página https://www.saucedemo.com/
   Autenticarse con el usuario: standard_user y password: secret_sauce
   Agregar dos productos al carrito
@@ -14,7 +14,7 @@ se creo aparte la funcionalidad de login y la misma es empleada como Background 
 se creo un Helpers para que convertir el String que se recibe de producto a una lista y asi poder seleccionar cualquier producto que desee y agregaro al carrito
 se creo un Helpers para eliminar los caracteres (menos numeros y punto) de los precios de los productos y asi poder verificar que la sumatoria de los productos agregados al carrito es igual al sub total
   
-#prueba Api
+# prueba Api
 endpoint  https://api.demoblaze.com/signup
   Crear un nuevo usuario en signup
   Intentar crear un usuario ya existente
@@ -25,7 +25,7 @@ endpoint  https://api.demoblaze.com/login
 
 se crearon 4 payloads (UsuarioNuevo, UsuarioCreado, UsuarioIncorrecto,ContraseñaIncorrecta) los cuales se emplean para la verificacion de los endpoint.. se creo un helps para generar usuario aletario para que sea empleado en la creacion de un nuevo usuario y asi poder correr las pruebas las veces que se dese sin necesidad de modifcar el payload Json UsuarioNuevo
 
-##Este proyecto fue creado con:
+## Este proyecto fue creado con:
 
 Selenium WebDriver: para interactuar con WebElements en la página web. 
 Java: Como lenguaje de programación. 
