@@ -10,9 +10,9 @@ Realizar una prueba funcional automatizada (Prueba E2E) de un flujo de compra en
   Completar el formulario de compra
   Finalizar la compra hasta la confirmación: “THANK YOU FOR YOUR ORDER”
 
-se creo aparte la funcionalidad de login y la misma es empleada como Background en la funcionalidad de la comprar de un producto.
-se creo un Helpers para que convertir el String que se recibe de producto a una lista y asi poder seleccionar cualquier producto que desee y agregaro al carrito
-se creo un Helpers para eliminar los caracteres (menos numeros y punto) de los precios de los productos y asi poder verificar que la sumatoria de los productos agregados al carrito es igual al sub total
+se creo aparte la funcionalidad de login y la misma es empleada como Background en la funcionalidad de la compra de un producto.
+se creo un Helpers para convertir el String que se recibe dedes productos a una lista y asi poder seleccionar cualquier producto que desea agregar al carrito
+se creo un Helpers para eliminar los caracteres (menos numeros y punto) de los precios de los productos y asi poder verificar que la sumatoria de los productos agregados al carrito es igual al subtotal
   
 # prueba Api
 endpoint  https://api.demoblaze.com/signup
@@ -23,7 +23,7 @@ endpoint  https://api.demoblaze.com/login
   Usuario y password correcto en login
   Usuario y password incorrecto en login
 
-se crearon 4 payloads (UsuarioNuevo, UsuarioCreado, UsuarioIncorrecto,ContraseñaIncorrecta) los cuales se emplean para la verificacion de los endpoint.. se creo un helps para generar usuario aletario para que sea empleado en la creacion de un nuevo usuario y asi poder correr las pruebas las veces que se dese sin necesidad de modifcar el payload Json UsuarioNuevo
+se crearon 4 payloads (UsuarioNuevo, UsuarioCreado, UsuarioIncorrecto,ContraseñaIncorrecta) los cuales se emplean para la verificacion de los endpoint.. se creo un helps para generar usuario aletario para que sea empleado en la creacion de un nuevo usuario y asi poder correr las pruebas las veces que se desee sin necesidad de modificar el payload Json UsuarioNuevo
 
 ## Este proyecto fue creado con:
 
@@ -32,7 +32,9 @@ Java: Como lenguaje de programación.
 RestAssured: para las pruebas de Api
 Cucumber: para escribir escenarios de prueba como funciones de desarrollo impulsado por el comportamiento y colaborar con los analistas comerciales. 
 Informes de extensión: para generar informes HTML. 
-Gradle: como herramienta de construcción. Configuración
+Gradle: como herramienta de construcción. 
+
+## Configuración
 
 Instale JDK (última versión estable). Descarga los WebDrivers que usarás en tu proyecto. Si usa Windows, especifique la ruta al controlador en BasePage.java como System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver"); Si está en MacOS: Abra la Terminal Ejecute sudo nano /etc/paths Ingrese su contraseña Vaya al final del archivo e ingrese la ruta que desea agregar (Mi RUTA se parece a: /Users/myname/Documents/WebDriver) Control -x para salir Y para guardar Presione enter para confirmar Para verificar dos veces, salga de Terminal y reinícielo. Ejecute echo $PATH. Debería ver su ruta recién agregada en el flujo de otras rutas que ya están allí. ¡Finalmente, actualice sus pruebas para que se ejecuten con Chrome y ejecute sus pruebas! Instale el complemento Cucumber en el IDE de su elección. Cree el proyecto para descargar las dependencias especificadas en Gradle.build.
 
