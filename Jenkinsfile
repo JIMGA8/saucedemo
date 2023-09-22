@@ -8,7 +8,7 @@ pipeline{
         }
         stage('Test'){
             steps{
-                echo "Etapa TEST no Disponible verificandosss"
+                echo "Etapa TEST no Disponible"
             }
         }
         stage('Deploy'){
