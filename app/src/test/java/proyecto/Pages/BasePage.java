@@ -11,14 +11,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BasePage {
     protected static WebDriver driver;
-    private static WebDriverWait wait;
+    protected static WebDriverWait wait;
 
     static {
-        System.setProperty("webdriver.chrome.driver",
-                "C://Users//GOIAR//Desktop//proyecto//driver//chromedriver.exe");
+        WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--incognito");
         // chromeOptions.addArguments("--headless");

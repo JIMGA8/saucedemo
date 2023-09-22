@@ -53,6 +53,7 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.javafaker/javafaker
     implementation 'com.github.javafaker:javafaker:1.0.2'
 
+    testImplementation("io.github.bonigarcia:webdrivermanager:5.4.1")
 
 }
 

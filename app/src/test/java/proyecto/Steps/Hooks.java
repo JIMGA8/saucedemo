@@ -1,10 +1,8 @@
 package proyecto.Steps;
 
 import java.util.List;
-
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-
 import proyecto.Pages.BasePage;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
