@@ -13,7 +13,7 @@ pipeline{
         }
         stage('Deploy'){
             steps{
-                echo "gradle build"
+                sh "gradle build"
             }
         }
     }
