@@ -1,0 +1,42 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-test-report:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Dar permisos a gradlew
+        run: chmod +x gradlew
+
+      - name: Build
+        run: ./gradlew clean build
+
+      - name: Test
+        run: ./gradlew test --tests proyecto.runner.runner
+
+      - name: Guardar reporte Cucumber
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-report
+          path: app/target/cucumber-reports.html
+
+      - name: Guardar resultados JUnit
+        uses: actions/upload-artifact@v3
+        with:
+          name: junit-results
+          path: app/build/test-results/**/*.xml
