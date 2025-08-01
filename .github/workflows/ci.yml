@@ -1,130 +1,54 @@
-name: CI Pipeline with Jira & Xray
+name: CI Pipeline
 
 on:
   push:
     branches:
       - main
-      - feature/cicd
+  pull_request:
 
 jobs:
-  build-and-xray:
+  build-test-report:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout código
         uses: actions/checkout@v3
 
-      # Paso de ejemplo para Node.js, cambia según tu stack
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
         with:
-          node-version: '18'
+          distribution: 'temurin'
+          java-version: '21'
 
-      - name: Install dependencies
-        run: npm install
+      - name: Dar permisos a gradlew
+        run: chmod +x gradlew
 
-      - name: Run tests and generate report
-        run: |
-          npm test
-          # Suponiendo que generas un reporte en JSON o XML para Xray
-          # Ejemplo:
-          # jest --json --outputFile=test-results.json
+      - name: Build
+        run: ./gradlew clean build
 
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Test
+        run: ./gradlew test --tests proyecto.runner.runner
 
-      - name: Manage Jira Test Plan and Xray Test Execution
+      - name: Guardar reporte Cucumber
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-report
+          path: app/target/cucumber-reports.html
+
+      - name: Subir resultados Cucumber a Xray
         env:
-          PROJECT_KEY: ${{ secrets.PROJECT_KEY }}
-          JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-          JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
-          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-          XRAY_BASE_URL: ${{ secrets.XRAY_BASE_URL }}          # URL base para Xray API
           XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
           XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
         run: |
-          PLAN_NAME="Automated Regression Plan"
-          AUTH=$(echo -n "$JIRA_USERNAME:$JIRA_API_TOKEN" | base64)
+          TOKEN=$(curl -s -X POST https://xray.cloud.getxray.app/api/v2/authenticate \
+            -H 'Content-Type: application/json' \
+            -d '{"client_id": "'$XRAY_CLIENT_ID'", "client_secret": "'$XRAY_CLIENT_SECRET'"}' | tr -d '"')
+          curl -H "Authorization: Bearer $TOKEN" \
+            -F "file=@app/target/cucumber.json" \
+            "https://xray.cloud.getxray.app/api/v2/import/execution/cucumber?projectKey=DEMO"
 
-          # Buscar Test Plan en Jira
-          QUERY="project = $PROJECT_KEY AND summary ~ \"$PLAN_NAME\" AND issuetype = \"Test Plan\""
-          SEARCH_URL="$JIRA_BASE_URL/rest/api/3/search?jql=$(echo $QUERY | jq -sRr @uri)"
-
-          RESULT=$(curl -s -H "Authorization: Basic $AUTH" -H "Accept: application/json" "$SEARCH_URL")
-          EXISTING_PLAN_KEY=$(echo "$RESULT" | jq -r '.issues[0].key')
-
-          if [ "$EXISTING_PLAN_KEY" == "null" ]; then
-            echo "Creando nuevo Test Plan..."
-            CREATE_BODY=$(cat <<EOF
-{
-  "fields": {
-    "project": { "key": "$PROJECT_KEY" },
-    "summary": "$PLAN_NAME",
-    "issuetype": { "name": "Test Plan" }
-  }
-}
-EOF
-)
-            CREATE_RES=$(curl -s -X POST "$JIRA_BASE_URL/rest/api/3/issue" \
-              -H "Authorization: Basic $AUTH" \
-              -H "Content-Type: application/json" \
-              -d "$CREATE_BODY")
-            EXISTING_PLAN_KEY=$(echo "$CREATE_RES" | jq -r '.key')
-            echo "Test Plan creado: $EXISTING_PLAN_KEY"
-          else
-            echo "Ya existe el Test Plan con key: $EXISTING_PLAN_KEY"
-          fi
-
-          # AUTENTICACIÓN Xray (OAuth 2.0)
-          echo "Autenticando en Xray..."
-          TOKEN_RESPONSE=$(curl -s -X POST "$XRAY_BASE_URL/authenticate" \
-            -H "Content-Type: application/json" \
-            -d "{\"client_id\": \"$XRAY_CLIENT_ID\", \"client_secret\": \"$XRAY_CLIENT_SECRET\"}")
-          XRAY_TOKEN=$(echo "$TOKEN_RESPONSE" | jq -r '.')
-
-          if [ -z "$XRAY_TOKEN" ] || [ "$XRAY_TOKEN" == "null" ]; then
-            echo "Error obteniendo token de Xray"
-            exit 1
-          fi
-
-          echo "Token de Xray obtenido"
-
-          # Crear Test Execution asociado al Test Plan
-          echo "Creando Test Execution en Xray asociado a $EXISTING_PLAN_KEY..."
-          TEST_EXEC_BODY=$(cat <<EOF
-{
-  "testPlanKey": "$EXISTING_PLAN_KEY",
-  "info": {
-    "summary": "Automated Test Execution from GitHub Actions",
-    "description": "Ejecución automatizada creada desde GitHub Actions",
-    "testEnvironments": ["CI Environment"],
-    "revision": "1",
-    "startDate": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-  }
-}
-EOF
-)
-
-          TEST_EXEC_RESPONSE=$(curl -s -X POST "$XRAY_BASE_URL/api/v2/testexecutions" \
-            -H "Authorization: Bearer $XRAY_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d "$TEST_EXEC_BODY")
-
-          TEST_EXEC_KEY=$(echo "$TEST_EXEC_RESPONSE" | jq -r '.key')
-
-          if [ -z "$TEST_EXEC_KEY" ] || [ "$TEST_EXEC_KEY" == "null" ]; then
-            echo "Error creando Test Execution en Xray"
-            echo "$TEST_EXEC_RESPONSE"
-            exit 1
-          fi
-
-          echo "Test Execution creado con key: $TEST_EXEC_KEY"
-
-          # Subir resultados (ejemplo de archivo JSON generado por Jest o similar)
-          echo "Subiendo resultados de prueba a Xray..."
-          curl -s -X POST "$XRAY_BASE_URL/api/v2/import/execution" \
-            -H "Authorization: Bearer $XRAY_TOKEN" \
-            -F "file=@./test-results.json" \
-            -F "testExecKey=$TEST_EXEC_KEY"
-
-          echo "Proceso completado."
+      - name: Guardar resultados JUnit
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-results
+          path: app/build/test-results/**/*.xml
