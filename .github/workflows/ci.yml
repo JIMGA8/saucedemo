@@ -30,7 +30,7 @@ jobs:
         run: ./gradlew test --tests proyecto.runner.runner
 
       - name: Guardar reporte Cucumber
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cucumber-report
           path: app/target/cucumber-reports.html
@@ -48,7 +48,7 @@ jobs:
             "https://xray.cloud.getxray.app/api/v2/import/execution/cucumber?projectKey=DEMO"
 
       - name: Guardar resultados JUnit
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: junit-results
           path: app/build/test-results/**/*.xml
