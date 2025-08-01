@@ -18,7 +18,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
 
       - name: Dar permisos a gradlew
         run: chmod +x gradlew
@@ -34,6 +34,18 @@ jobs:
         with:
           name: cucumber-report
           path: app/target/cucumber-reports.html
+
+      - name: Subir resultados Cucumber a Xray
+        env:
+          XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
+          XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+        run: |
+          TOKEN=$(curl -s -X POST https://xray.cloud.getxray.app/api/v2/authenticate \
+            -H 'Content-Type: application/json' \
+            -d '{"client_id": "'$XRAY_CLIENT_ID'", "client_secret": "'$XRAY_CLIENT_SECRET'"}' | tr -d '"')
+          curl -H "Authorization: Bearer $TOKEN" \
+            -F "file=@app/target/cucumber.json" \
+            "https://xray.cloud.getxray.app/api/v2/import/execution/cucumber?projectKey=DEMO"
 
       - name: Guardar resultados JUnit
         uses: actions/upload-artifact@v3

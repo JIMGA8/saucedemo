@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "build and test with gradle",
+			"command": "./gradlew clean test",
+			"group": "build",
+			"problemMatcher": [
+				"$javac"
+			],
+			"args": []
+		}
+	]
+}
